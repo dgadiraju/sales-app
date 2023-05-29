@@ -20,9 +20,6 @@ def hello_world():
 
 @app.route('/users')
 def users():
-    users = [
-        {'id': 1, 'first_name': 'Scott', 'last_name': 'Tiger', 'username': 'stiger', 'email': 'stiger@email.com'},
-        {'id': 2, 'first_name': 'Mickey', 'last_name': 'Mouse', 'username': 'mmouse', 'email': 'mmouse@email.com'},
-        {'id': 3, 'first_name': 'Charlie', 'last_name': 'Chaplin', 'username': 'cchaplin', 'email': 'cchaplin@email.com'}
-    ]
+    user_recs = db.session.query(User).all()
+    users = list(map(lambda rec: rec.__dict__, user_recs))
     return render_template('users.html', users=users)
