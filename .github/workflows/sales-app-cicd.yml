@@ -24,7 +24,7 @@ jobs:
       run: |
         mkdir -p /tmp/keys && chmod 700 /tmp/keys
         echo "$APP_SSH_SECRET_KEY" > /tmp/keys/private_key && chmod 600 /tmp/keys/private_key
-    - name: Deploy Application
+    - name: Create Folder and Deploy Application
       env:
         APP_HOST: ${{ secrets.APP_HOST }}
         APP_SSH_USER: ${{ secrets.APP_SSH_USER }}
