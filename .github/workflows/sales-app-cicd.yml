@@ -33,4 +33,4 @@ jobs:
         ssh -o StrictHostKeyChecking=no -i /tmp/keys/private_key ${APP_SSH_USER}@${APP_HOST} '
           mkdir -p ~/sales-app
         '
-        scp -i /tmp/keys/private_key * ${APP_SSH_USER}@${APP_HOST}:~/sales-app
+        scp -i /tmp/keys/private_key -r * ${APP_SSH_USER}@${APP_HOST}:~/sales-app
