@@ -40,4 +40,4 @@ jobs:
         APP_SSH_USER: ${{ secrets.APP_SSH_USER }}
         APP_SSH_SECRET_KEY: ${{ secrets.APP_SSH_SECRET_KEY }}
       run: |
-        ssh -i /tmp/keys/private_key ${APP_SSH_USER}@${APP_HOST} "/bin/bash -c 'source ~/sales-app/setup.sh'"
+        ssh -i /tmp/keys/private_key ${APP_SSH_USER}@${APP_HOST} "/bin/bash -c 'source ~/cicd-demo/setup.sh'"
