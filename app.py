@@ -1,8 +1,10 @@
 import os
+from dotenv import load_dotenv
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 
+load_dotenv('.env')
 db = SQLAlchemy()
 app = Flask(__name__)
 Bootstrap(app)
