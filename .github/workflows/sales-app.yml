@@ -28,9 +28,14 @@ jobs:
       env:
         APP_HOST: ${{ secrets.APP_HOST }}
         APP_SSH_USER: ${{ secrets.APP_SSH_USER }}
-        APP_SSH_SECRET_KEY: ${{ secrets.APP_SSH_SECRET_KEY }}
       run: |
         ssh -o StrictHostKeyChecking=no -i /tmp/keys/private_key ${APP_SSH_USER}@${APP_HOST} '
           mkdir -p ~/sales-app
         '
         scp -i /tmp/keys/private_key -r * ${APP_SSH_USER}@${APP_HOST}:~/sales-app
+    - name: Build and Run Application
+      env:
+        APP_HOST: ${{ secrets.APP_HOST }}
+        APP_SSH_USER: ${{ secrets.APP_SSH_USER }}
+      run: |
+        ssh -i /tmp/keys/private_key ${APP_SSH_USER}@${APP_HOST} "/bin/bash -c 'source ~/sales-app/setup.sh'"
