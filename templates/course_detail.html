@@ -1,0 +1,16 @@
+{%- extends "base.html" %}
+
+{% block content %}
+    <h3>Course Details</h3>
+    <div class="container">
+        <label for="course_name"><b>Course Name</b></label>
+        {{ course.course_name }}
+        <br><br>
+        <label for="course_author"><b>Course Author</b></label>
+        {{ course.course_author }}
+        <br><br>
+        <label for="course_endpoint"><b>Course Endpoint</b></label>
+        {{ course.course_endpoint }}
+        <br><br>
+    </div>
+{%- endblock %}
