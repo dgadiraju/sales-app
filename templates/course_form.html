@@ -1,0 +1,18 @@
+{%- extends "base.html" %}
+
+{% block content %}
+<h3>Course Form</h3>
+<form method="POST">
+    <label for="course_name"><b>Course Name</b></label>
+    <input type="text" placeholder="Enter Course Name" name="course_name" />
+    <br><br>
+    <label for="course_author"><b>Course Author</b></label>
+    <input type="text" placeholder="Enter Course Author" name="course_author" />
+    <br><br>
+    <label for="course_endpoint"><b>Course Endpoint</b></label>
+    <input type="text" placeholder="Enter Course Endpoint" name="course_endpoint" />
+    <br><br>
+
+    <button type="submit">Save</button>
+</form>
+{%- endblock %}
