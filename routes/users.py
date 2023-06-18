@@ -18,20 +18,31 @@ def user():
     if request.method == 'GET':
         if id:
             user = User.query.get(id)
+            form_action = request.args.get('action')
+            if form_action == 'edit':
+                return render_template('user_form.html', user=user)
             return render_template('user_detail.html', user=user)
         else:
-            return render_template('user_form.html')
+            return render_template('user_form.html', user=None)
     elif request.method == 'POST':
+        id = request.form['id']
         first_name = request.form['first_name']
         last_name = request.form['last_name']
         username = request.form['username']
         email = request.form['email']
-        user = User(
-            first_name=first_name,
-            last_name=last_name,
-            username=username,
-            email=email
-        )
-        db.session.add(user)
+        if id:
+            user = User.query.get(id)
+            user.first_name = first_name
+            user.last_name = last_name
+            user.username = username
+            user.email = email
+        else:
+            user = User(
+                first_name=first_name,
+                last_name=last_name,
+                username=username,
+                email=email
+            )
+            db.session.add(user)
         db.session.commit()
         return redirect(url_for('users'))
