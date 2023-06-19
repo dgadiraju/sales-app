@@ -22,6 +22,10 @@ def course():
             form_action = request.args.get('action')
             if form_action == 'edit':
                 return render_template('course_form.html', course=course)
+            elif form_action == 'delete':
+                db.session.delete(course)
+                db.session.commit()
+                return redirect(url_for('courses'))
             return render_template('course_detail.html', course=course)
         else:
             return render_template('course_form.html', course=None)
