@@ -21,6 +21,10 @@ def user():
             form_action = request.args.get('action')
             if form_action == 'edit':
                 return render_template('user_form.html', user=user)
+            elif form_action == 'delete':
+                db.session.delete(user)
+                db.session.commit()
+                return redirect(url_for('users'))
             return render_template('user_detail.html', user=user)
         else:
             return render_template('user_form.html', user=None)
