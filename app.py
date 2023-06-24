@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from flask import Flask, render_template
+from flask import Flask, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 
@@ -23,5 +23,4 @@ from models.user import User
 @app.route('/')
 def hello_world():
     # rec = db.get_or_404(User, 1)
-    rec = User.query.get_or_404(1)
-    return render_template('index.html', user=rec)
+    return redirect(url_for('users'))
