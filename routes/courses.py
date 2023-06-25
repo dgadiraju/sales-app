@@ -1,5 +1,6 @@
 from flask import render_template, request, \
     redirect, url_for
+from sqlalchemy import or_
 
 from app import app
 from app import db
@@ -8,8 +9,17 @@ from models.course import Course
 
 @app.route('/courses')
 def courses():
-    course_recs = db.session.query(Course).all()
+    search_query = request.args.get('search', '')
+    
+    if search_query:
+        # Query the database for courses matching the search query
+        course_recs = db.session.query(Course).filter(or_(Course.course_name.ilike(f"%{search_query}%"))).all()
+    else:
+        # Query the database for all courses
+        course_recs = db.session.query(Course).all()
+    
     courses = list(map(lambda rec: rec.__dict__, course_recs))
+    
     return render_template('courses.html', courses=courses)
 
 
