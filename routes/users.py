@@ -1,15 +1,29 @@
 from flask import render_template, request, \
     redirect, url_for
+from sqlalchemy import or_
+
 from app import app
 from app import db
 from models.user import User
 
 
+from sqlalchemy import func
+
 @app.route('/users')
 def users():
-    user_recs = db.session.query(User).all()
+    search_email = request.args.get('email', '')  # Get the search query from request arguments
+
+    if search_email:
+        # Query the database and filter users based on the pattern match
+        user_recs = db.session.query(User).filter(User.email.like(f'{search_email.lower()}%')).all()
+    else:
+        # Retrieve all users if no search query is provided
+        user_recs = db.session.query(User).all()
+
     users = list(map(lambda rec: rec.__dict__, user_recs))
     return render_template('users.html', users=users)
+
+
 
 
 @app.route('/user', methods=['GET', 'POST'])

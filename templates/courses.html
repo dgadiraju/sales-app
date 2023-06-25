@@ -1,6 +1,12 @@
 {%- extends "base.html" %}
 {% block content %}
 <h3>Courses Dashboard</h3>
+<form action="{{ url_for('courses') }}" method="GET" class="mb-3">
+    <div class="input-group">
+        <input type="text" name="search" class="form-control" placeholder="Search by course title">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
 <table id="data" class="table table-striped">
     <thead>
         <tr>
