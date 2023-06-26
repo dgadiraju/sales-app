@@ -5,13 +5,13 @@
     <div class="container">
         <form method="GET" action="{{ url_for('course') }}">
             <input type="text" name="course_id" value="{{ course.course_id }}" hidden /> 
-            <label for="course_name"><b>Course Name</b></label>
+            <label><b>Course Name</b></label>
             {{ course.course_name }}
             <br><br>
-            <label for="course_author"><b>Course Author</b></label>
+            <label><b>Course Author</b></label>
             {{ course.course_author }}
             <br><br>
-            <label for="course_endpoint"><b>Course Endpoint</b></label>
+            <label><b>Course Endpoint</b></label>
             {{ course.course_endpoint }}
             <br><br>
 

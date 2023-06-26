@@ -10,16 +10,17 @@ from models.course import Course
 @app.route('/courses')
 def courses():
     search_query = request.args.get('search', '')
-    
+
     if search_query:
         # Query the database for courses matching the search query
-        course_recs = db.session.query(Course).filter(or_(Course.course_name.ilike(f"%{search_query}%"))).all()
+        course_recs = db.session.query(Course).filter(
+            or_(Course.course_name.ilike(f"%{search_query}%"))).all()
     else:
         # Query the database for all courses
         course_recs = db.session.query(Course).all()
-    
+
     courses = list(map(lambda rec: rec.__dict__, course_recs))
-    
+
     return render_template('courses.html', courses=courses)
 
 
@@ -31,7 +32,7 @@ def course():
             course = Course.query.get(course_id)
             if not course:
                 app.logger.error(f'Course with id {course_id} not found...')
-                return redirect(url_for('courses'))                
+                return redirect(url_for('courses'))
             form_action = request.args.get('action')
             if form_action == 'edit':
                 return render_template('course_form.html', course=course)
@@ -54,8 +55,8 @@ def course():
             course.course_endpoint = course_endpoint
         else:
             course = Course(
-                course_name=course_name, 
-                course_author=course_author, 
+                course_name=course_name,
+                course_author=course_author,
                 course_endpoint=course_endpoint
             )
             db.session.add(course)
