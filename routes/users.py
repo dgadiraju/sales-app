@@ -32,6 +32,9 @@ def user():
     if request.method == 'GET':
         if id:
             user = User.query.get(id)
+            if not user:
+                app.logger.error(f'User with id {id} not found...')
+                return redirect(url_for('users'))
             form_action = request.args.get('action')
             if form_action == 'edit':
                 return render_template('user_form.html', user=user)
